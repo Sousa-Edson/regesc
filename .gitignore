@@ -37,3 +37,4 @@ bin/
 target/classes/application.properties
 target/classes/application.properties
 target/classes/META-INF/maven/com.edson/regesc/pom.properties
+*.properties

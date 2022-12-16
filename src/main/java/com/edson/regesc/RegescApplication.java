@@ -8,7 +8,7 @@ public class RegescApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RegescApplication.class, args);
-		//teste
+		 
 	}
 
 }

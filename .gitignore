@@ -33,3 +33,4 @@ build/
 .vscode/
 target/classes/application.properties
 *.properties
+bin/

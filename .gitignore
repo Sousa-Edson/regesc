@@ -34,3 +34,4 @@ build/
 target/classes/application.properties
 *.properties
 bin/
+target/classes/application.properties

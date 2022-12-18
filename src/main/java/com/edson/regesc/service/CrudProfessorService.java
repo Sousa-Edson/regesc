@@ -4,7 +4,9 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.edson.regesc.orm.Disciplina;
 import com.edson.regesc.orm.Professor;
 import com.edson.regesc.repository.ProfessorRepository;
 
@@ -16,6 +18,7 @@ public class CrudProfessorService {
         this.professorRepository = professorRepository;
     }
 
+    @Transactional
     public void menu(Scanner scanner) {
         Boolean isTrue = true;
         while (isTrue) {
@@ -25,6 +28,8 @@ public class CrudProfessorService {
             System.out.println("2 - atualizar um professor");
             System.out.println("3 - visualizar todos os professores");
             System.out.println("4- deletar um professor");
+            System.out.println("5 - visualizar detalhe de um professor");
+
             int opcao = scanner.nextInt();
             switch (opcao) {
                 case 1:
@@ -38,6 +43,9 @@ public class CrudProfessorService {
                     break;
                 case 4:
                     deletar(scanner);
+                    break;
+                case 5:
+                    visualizarProfessor(scanner);
                     break;
                 default:
                     isTrue = false;
@@ -93,9 +101,38 @@ public class CrudProfessorService {
     }
 
     private void deletar(Scanner scanner) {
-        System.out.print("Digite o ID do professor a ser deletado:");
+        System.out.print("Digite o ID do professor :");
         Long id = scanner.nextLong();
         this.professorRepository.deleteById(id);
         System.out.println("\nProfessor deletado\n");
     }
+
+    @Transactional
+    private void visualizarProfessor(Scanner scanner) {
+        System.out.println();
+
+        System.out.print("Digite o ID do professor :");
+        Long id = scanner.nextLong();
+        Optional<Professor> optional = this.professorRepository.findById(id);
+        System.out.println();
+        if (optional.isPresent()) {
+            System.out.println("Professor : {");
+            Professor professor = optional.get();
+            System.out.println("ID: " + professor.getId());
+            System.out.println("NOME: " + professor.getNome());
+            System.out.println("PRONTUARIO: " + professor.getProntuario());
+            // System.out.println("PRONTUARIO: " + professor.getDisciplinas());
+            System.out.println("DISCIPLINAS [ ");
+            for (Disciplina disciplina : professor.getDisciplinas()) {
+                System.out.println();
+                System.out.println("\tId: " + disciplina.getId());
+                System.out.println("\tNome: " + disciplina.getNome());
+                System.out.println("\tSemestre: " + disciplina.getSemestre());
+            }
+            System.out.println("]\n}");
+        }
+
+        System.out.println();
+    }
+
 }

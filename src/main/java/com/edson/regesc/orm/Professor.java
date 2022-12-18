@@ -1,10 +1,13 @@
 package com.edson.regesc.orm;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +20,9 @@ public class Professor {
     private String nome;
     @Column(nullable = false, unique = true)
     private String prontuario;
+
+    @OneToMany(mappedBy = "professor")
+    private List<Disciplina> disciplinas;
 
     @Deprecated
     public Professor() {
@@ -51,7 +57,5 @@ public class Professor {
     public String toString() {
         return "Professor [id=" + id + ", nome=" + nome + ", prontuario=" + prontuario + "]";
     }
-
-     
 
 }

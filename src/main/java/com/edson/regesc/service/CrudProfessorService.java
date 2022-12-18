@@ -58,7 +58,7 @@ public class CrudProfessorService {
     }
 
     private void atualizar(Scanner scanner) {
-        System.out.print("\nDigite o ID do professor a ser atualizado:");
+        System.out.print("Digite o ID do professor a ser atualizado:");
         Long id = scanner.nextLong();
         Optional<Professor> optional = this.professorRepository.findById(id);
         if (optional.isPresent()) {
@@ -93,7 +93,7 @@ public class CrudProfessorService {
     }
 
     private void deletar(Scanner scanner) {
-        System.out.print("\nDigite o ID do professor a ser deletado:");
+        System.out.print("Digite o ID do professor a ser deletado:");
         Long id = scanner.nextLong();
         this.professorRepository.deleteById(id);
         System.out.println("\nProfessor deletado\n");

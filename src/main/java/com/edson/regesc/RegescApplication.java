@@ -14,7 +14,7 @@ public class RegescApplication implements CommandLineRunner {
 	private CrudProfessorService professorService;
 	private CrudDisciplinaService disciplinaService;
 
-	public RegescApplication(CrudProfessorService professorService,CrudDisciplinaService disciplinaService) {
+	public RegescApplication(CrudProfessorService professorService, CrudDisciplinaService disciplinaService) {
 		this.professorService = professorService;
 		this.disciplinaService = disciplinaService;
 	};
@@ -38,10 +38,9 @@ public class RegescApplication implements CommandLineRunner {
 				case 1:
 					professorService.menu(scanner);
 					break;
-					case 2:
+				case 2:
 					disciplinaService.menu(scanner);
 					break;
-
 				default:
 					isTrue = false;
 					break;

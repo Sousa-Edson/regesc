@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PreRemove;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,8 +23,17 @@ public class Professor {
     @Column(nullable = false, unique = true)
     private String prontuario;
 
-    @OneToMany(mappedBy = "professor",fetch = FetchType.LAZY) //, fetch = FetchType.EAGER
+    @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY) // , fetch = FetchType.EAGER
     private List<Disciplina> disciplinas;
+
+    @PreRemove
+    public void atualizaDisciplinaOnRemove() {
+        System.out.println("****atualizaDisciplinaOnDelete***");
+        for (Disciplina disciplina : this.disciplinas) {
+            disciplina.setProfessor(null);
+
+        }
+    }
 
     @Deprecated
     public Professor() {

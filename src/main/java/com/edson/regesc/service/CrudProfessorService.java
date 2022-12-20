@@ -27,7 +27,7 @@ public class CrudProfessorService {
             System.out.println("1 - cadastrar novo professor");
             System.out.println("2 - atualizar um professor");
             System.out.println("3 - visualizar todos os professores");
-            System.out.println("4- deletar um professor");
+            System.out.println("4 - deletar um professor");
             System.out.println("5 - visualizar detalhe de um professor");
 
             int opcao = scanner.nextInt();

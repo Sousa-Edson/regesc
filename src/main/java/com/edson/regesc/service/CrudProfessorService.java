@@ -3,6 +3,8 @@ package com.edson.regesc.service;
 import java.util.Optional;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,7 @@ public class CrudProfessorService {
 
     @Transactional
     public void menu(Scanner scanner) {
+    	 
         Boolean isTrue = true;
         while (isTrue) {
             System.out.println("\nQual ação você deseja executar?");

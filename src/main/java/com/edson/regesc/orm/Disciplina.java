@@ -32,7 +32,7 @@ public class Disciplina {
     @JoinTable(name = "disciplinas_alunos",
     joinColumns = @JoinColumn(name = "disciplina_fk"),inverseJoinColumns = @JoinColumn(name = "aluno_fk"))
     List<Aluno> alunos;
-
+ 
     @Deprecated
     public Disciplina() {
     }

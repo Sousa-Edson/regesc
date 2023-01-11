@@ -25,6 +25,7 @@ public class RelatorioService {
             System.out.println("2 - aluno que contenha no nome");
             System.out.println("3 - aluno que contenha no nome e idade menor ou igual");
             System.out.println("4 - aluno que contenha no nome e idade maior ou igual");
+            System.out.println("5 - aluno que contenha no nome e idade maior ou igual Matricula");
 
             int opcao = scanner.nextInt();
             switch (opcao) {
@@ -37,8 +38,11 @@ public class RelatorioService {
                 case 3:
                     this.alunoQueContenhaNomeEIdadeMenorQue(scanner);
                     break;
-                    case 4:
-                    this.alunoQueContenhaNomeEIdadeMaiorQue(scanner); 
+                case 4:
+                    this.alunoQueContenhaNomeEIdadeMaiorQue(scanner);
+                    break;
+                case 5:
+                    this.alunoQueContenhaNomeEIdadeMaiorQueMatricula(scanner);
                     break;
 
                 default:
@@ -77,7 +81,18 @@ public class RelatorioService {
         String nome = scanner.next();
         System.out.print("Idade: ");
         Integer idade = scanner.nextInt();
-        List<Aluno> alunos = this.alunoRepository.findByNomeStartingWithAndIdadeGreaterThanEqual(nome, idade);
+        List<Aluno> alunos = this.alunoRepository.findNomeIgualOuMaior(nome, idade);
+        alunos.forEach(System.out::println);
+    }
+
+    private void alunoQueContenhaNomeEIdadeMaiorQueMatricula(Scanner scanner) {
+        System.out.print("Nome: ");
+        String nomeAluno = scanner.next();
+        System.out.print("Idade: ");
+        Integer idadeAluno = scanner.nextInt();
+        System.out.print("Nome disciplina: ");
+        String nomeDisciplina = scanner.next();
+        List<Aluno> alunos = this.alunoRepository.findNomeIgualOuMaiorMatricula(nomeAluno, idadeAluno, nomeDisciplina);
         alunos.forEach(System.out::println);
     }
 

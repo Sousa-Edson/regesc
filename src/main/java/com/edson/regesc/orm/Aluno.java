@@ -1,6 +1,7 @@
 package com.edson.regesc.orm;
 
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,19 +22,21 @@ public class Aluno {
     private String nome;
     private Integer idade;
 
-    @ManyToMany(mappedBy = "alunos" , fetch = FetchType.EAGER) // aqui era para ser LAZY mas tava dando erro
-   private  List<Disciplina> disciplinas;
+    @ManyToMany(mappedBy = "alunos", fetch = FetchType.EAGER) // aqui era para ser LAZY mas tava dando erro
+    private Set<Disciplina> disciplinas;
 
     public Aluno() {
     }
 
-    public Aluno(Long id, String nome, Integer idade) {
+    public Aluno(Long id, String nome, Integer idade, Set<Disciplina> disciplinas) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
-       
+        this.disciplinas = disciplinas;
     }
-// , List<Disciplina> disciplinas      this.disciplinas = disciplinas;
+
+    // OBSERVAÇÃO => SET É UM CONJUNTO
+
     public Long getId() {
         return id;
     }
@@ -58,17 +61,17 @@ public class Aluno {
         this.idade = idade;
     }
 
-    public List<Disciplina> getDisciplinas() {
-        return disciplinas;
-    }
-
-    public void setDisciplinas(List<Disciplina> disciplinas) {
-        this.disciplinas = disciplinas;
-    }
-
     @Override
     public String toString() {
         return "Aluno [id=" + id + ", nome=" + nome + ", idade=" + idade + "]";
+    }
+
+    public Set<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(Set<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
     }
 
 }

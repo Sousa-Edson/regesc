@@ -1,6 +1,7 @@
 package com.edson.regesc.orm;
 
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,10 +30,9 @@ public class Disciplina {
     private Professor professor;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "disciplinas_alunos",
-    joinColumns = @JoinColumn(name = "disciplina_fk"),inverseJoinColumns = @JoinColumn(name = "aluno_fk"))
-    List<Aluno> alunos;
- 
+    @JoinTable(name = "disciplinas_alunos", joinColumns = @JoinColumn(name = "disciplina_fk"), inverseJoinColumns = @JoinColumn(name = "aluno_fk"))
+    Set<Aluno> alunos;
+
     @Deprecated
     public Disciplina() {
     }
@@ -75,20 +75,18 @@ public class Disciplina {
         this.professor = professor;
     }
 
-    
-
-    public List<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
-    }
-
     @Override
     public String toString() {
         return "Disciplina [id=" + id + ", nome=" + nome + ", semestre=" + semestre + ", professor=" + professor
                 + ", alunos=" + alunos + "]";
+    }
+
+    public Set<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(Set<Aluno> alunos) {
+        this.alunos = alunos;
     }
 
 }

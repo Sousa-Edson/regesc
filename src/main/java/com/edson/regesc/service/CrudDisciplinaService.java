@@ -1,9 +1,9 @@
 package com.edson.regesc.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -126,9 +126,9 @@ public class CrudDisciplinaService {
         System.out.println("\nDeletado\n");
     }
 
-    private List<Aluno> matricular(Scanner scanner) {
+    private Set<Aluno> matricular(Scanner scanner) {
         Boolean isTrue = true;
-        List<Aluno> alunos = new ArrayList<Aluno>();
+        Set<Aluno> alunos = new HashSet<Aluno>();
         while (isTrue) {
             System.out.println("ID do aluno a ser matriculado (digite 0 para sair)");
             Long alunoId = scanner.nextLong();
@@ -156,7 +156,7 @@ public class CrudDisciplinaService {
         Optional<Disciplina> optionalDisciplina = this.disciplinaRepository.findById(id);
         if (optionalDisciplina.isPresent()) {
             Disciplina disciplina = optionalDisciplina.get();
-            List<Aluno> novosAlunos = this.matricular(scanner);
+            Set<Aluno> novosAlunos = this.matricular(scanner);
             disciplina.getAlunos().addAll(novosAlunos);
 
             this.disciplinaRepository.save(disciplina);

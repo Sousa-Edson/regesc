@@ -28,7 +28,7 @@ public class Disciplina {
     @JoinColumn(name = "professor_id", nullable = true)
     private Professor professor;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "disciplinas_alunos",
     joinColumns = @JoinColumn(name = "disciplina_fk"),inverseJoinColumns = @JoinColumn(name = "aluno_fk"))
     List<Aluno> alunos;
@@ -75,9 +75,20 @@ public class Disciplina {
         this.professor = professor;
     }
 
+    
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
     @Override
     public String toString() {
-        return "Disciplina [id=" + id + ", nome=" + nome + ", semestre=" + semestre + ", professor=" + professor + "]";
+        return "Disciplina [id=" + id + ", nome=" + nome + ", semestre=" + semestre + ", professor=" + professor
+                + ", alunos=" + alunos + "]";
     }
 
 }

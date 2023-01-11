@@ -6,14 +6,21 @@ import java.util.Scanner;
 import org.springframework.stereotype.Service;
 
 import com.edson.regesc.orm.Aluno;
+import com.edson.regesc.orm.Professor;
 import com.edson.regesc.repository.AlunoRepository;
+import com.edson.regesc.repository.ProfessorRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class RelatorioService {
     private AlunoRepository alunoRepository;
+    private ProfessorRepository professorRepository;
 
-    public RelatorioService(AlunoRepository alunoRepository) {
+    public RelatorioService(AlunoRepository alunoRepository, ProfessorRepository professorRepository) {
         this.alunoRepository = alunoRepository;
+        this.professorRepository = professorRepository;
     }
 
     public void menu(Scanner scanner) {
@@ -26,6 +33,7 @@ public class RelatorioService {
             System.out.println("3 - aluno que contenha no nome e idade menor ou igual");
             System.out.println("4 - aluno que contenha no nome e idade maior ou igual");
             System.out.println("5 - aluno que contenha no nome e idade maior ou igual Matricula");
+            System.out.println("6 - professores atribuidos");
 
             int opcao = scanner.nextInt();
             switch (opcao) {
@@ -43,6 +51,9 @@ public class RelatorioService {
                     break;
                 case 5:
                     this.alunoQueContenhaNomeEIdadeMaiorQueMatricula(scanner);
+                    break;
+                case 6:
+                    this.professoresAtribuidos(scanner);
                     break;
 
                 default:
@@ -94,6 +105,18 @@ public class RelatorioService {
         String nomeDisciplina = scanner.next();
         List<Aluno> alunos = this.alunoRepository.findNomeIgualOuMaiorMatricula(nomeAluno, idadeAluno, nomeDisciplina);
         alunos.forEach(System.out::println);
+    }
+
+    private void professoresAtribuidos(Scanner scanner) {
+        System.out.print("Nome professor: ");
+        String nomeProfessor = scanner.next();
+
+        System.out.print("Nome disciplina: ");
+        String nomeDisciplina = scanner.next();
+
+        List<Professor> professor = this.professorRepository.findProfessorAtribuido(nomeProfessor, nomeDisciplina);
+        professor.forEach(System.out::println);
+
     }
 
 }

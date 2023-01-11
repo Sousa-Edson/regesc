@@ -22,6 +22,7 @@ public class CrudAlunoService {
         this.disciplinaRepository = disciplinaRepository;
     }
 
+    @Transactional
     public void menu(Scanner scanner) {
         Boolean isTrue = true;
         while (isTrue) {

@@ -22,7 +22,13 @@ public class Aluno {
     private String nome;
     private Integer idade;
 
-    @ManyToMany(mappedBy = "alunos", fetch = FetchType.EAGER) // aqui era para ser LAZY mas tava dando erro
+    @ManyToMany(mappedBy = "alunos", fetch = FetchType.LAZY)
+    /*
+     * aqui era para ser LAZY mas tava dando erro -> EAGER
+     * OPS
+     * corrigi estava faltando o @Transactional em cima do menu para aceitar
+     * transações lazy
+     */
     private Set<Disciplina> disciplinas;
 
     public Aluno() {
